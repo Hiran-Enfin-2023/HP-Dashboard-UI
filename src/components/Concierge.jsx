@@ -16,7 +16,7 @@ const Concierge = ({ selectedSession, setSelectedSession, menu, setMenu }) => {
   const loadTranscripts = async () => {
     try {
       const token = localStorage.getItem('access-token');
-      const response = await fetch(`http://localhost:5000/rest/concierge/${selectedSession}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/rest/concierge/${selectedSession}`, {
         headers: {
           Authorization: token
         },

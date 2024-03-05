@@ -16,7 +16,7 @@ const Product = ({ selectedProductSession, setSelectedProductSession }) => {
   const loadTranscripts = async () => {
     try {
       const token = localStorage.getItem('access-token');
-      const response = await fetch(`http://localhost:5000/rest/product/${selectedProductSession}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/rest/product/${selectedProductSession}`, {
         headers: {
           Authorization: token
         },

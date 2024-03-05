@@ -12,7 +12,7 @@ const ProductSidebar = ({ setSelectedProductSession }) => {
  
   const loadTranscripts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/rest/product/sessions");
+      const response = await fetch( `${process.env.REACT_APP_BACKEND_URL}/rest/product/sessions`);
       const data = await response.json();
       setSessionList(data);
     } catch (error) {

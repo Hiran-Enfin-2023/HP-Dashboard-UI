@@ -8,7 +8,7 @@ const Header = ({ menu, setMenu }) => {
 
 
   const refreshHandler = async () => {
-    const res = await fetch("http://localhost:5000/rest/refresh")
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/rest/refresh`)
     console.log(res);
   }
 
