@@ -30,7 +30,7 @@ function App() {
   return (
     <Router>
       <div id='app'>
-        <Header menu={menu} setMenu={setMenu}/>
+        <Header menu={menu} setMenu={setMenu} isLoggedIn={loggedIn}/>
         <Routes>
           {/* <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} /> */}
           <Route
