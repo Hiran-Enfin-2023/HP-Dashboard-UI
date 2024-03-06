@@ -8,8 +8,7 @@ const Header = ({ menu, setMenu, isLoggedIn }) => {
 
 
   const refreshHandler = async () => {
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/rest/refresh`)
-    console.log(res);
+     await fetch(`${process.env.REACT_APP_BACKEND_URL}/rest/refresh`)
   }
 
 

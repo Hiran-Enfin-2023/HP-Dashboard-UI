@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css"
 import ProductSidebar from './ProductSiderBar';
+import { ChatContainer, MainContainer, Message, MessageList } from '@chatscope/chat-ui-kit-react';
 
 const Product = ({ selectedProductSession, setSelectedProductSession }) => {
   const [messages, setMessages] = useState([]);
@@ -11,7 +12,7 @@ const Product = ({ selectedProductSession, setSelectedProductSession }) => {
     }
   }, [selectedProductSession]);
 
-  // console.log(selectedSession);
+
 
   const loadTranscripts = async () => {
     try {
@@ -30,37 +31,41 @@ const Product = ({ selectedProductSession, setSelectedProductSession }) => {
       console.error('Error loading transcripts:', error);
     }
   };
-  console.log(messages);
+
 
   return (
     <section className="middle-sections" id="transcripts">
-      <ProductSidebar setSelectedProductSession={setSelectedProductSession}/>
+      <ProductSidebar setSelectedProductSession={setSelectedProductSession} selectedProductSession={selectedProductSession} />
       <div id='message-main'>
 
         <h3 style={{ position: "sticky" }} className="dash-head">Messages</h3>
 
         <div className="message-container">
 
-          {messages.map((message, index) => {
-            return (
-              <div className="box">
-                <div
-                  key={index}
-                  className={`message ${message.role === 'assistant' ? 'assistant' : 'user'}`}
-                >
-                  <div className={`messages ${message.role === 'assistant' ? 'assistant-msg' : 'user-msg'}`}>
-                    {message.content}
-                  </div>
-                  <div className="role">
-                    <h6>{message.role}</h6>
-                  </div>
-                </div>
 
-              </div>
-            )
-          }
-          )
-          }
+
+          <MainContainer>
+            <ChatContainer>
+
+              <MessageList >
+                {messages.map((message) => {
+                  return (
+                    <>
+                      <Message style={{ padding: '8px' }}
+                        model={{
+                          message: message.content,
+                          direction: message.role === 'assistant' ? 'outgoing' : 'incoming'
+                        }}
+                      />
+
+                    </>
+                  )
+                })}
+              </MessageList>
+
+
+            </ChatContainer>
+          </MainContainer>
         </div>
 
       </div>

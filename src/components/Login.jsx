@@ -6,7 +6,7 @@ const Login = ({ setLoggedIn }) => {
 
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
+        // email: '',
         password: '',
     });
 
@@ -29,7 +29,6 @@ const Login = ({ setLoggedIn }) => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 setLoggedIn(true);
                 navigate("/")
                 localStorage.setItem('access-token', data.results.access_token)
@@ -58,7 +57,7 @@ const Login = ({ setLoggedIn }) => {
                 placeholder="Username"
               />
             </div>
-            <div className="input-field">
+            {/* <div className="input-field">
   
               <input
                 type="email"
@@ -68,7 +67,7 @@ const Login = ({ setLoggedIn }) => {
                 value={formData.email}
                 placeholder="Email"
               />
-            </div>
+            </div> */}
             <div className="input-field">
   
               <input

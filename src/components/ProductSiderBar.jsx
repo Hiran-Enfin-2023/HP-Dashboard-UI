@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const ProductSidebar = ({ setSelectedProductSession }) => {
+const ProductSidebar = ({ setSelectedProductSession, selectedProductSession }) => {
 
 
   const [sessionList, setSessionList] = useState([]);
@@ -20,7 +20,6 @@ const ProductSidebar = ({ setSelectedProductSession }) => {
     }
   };
 
-  console.log("Product siderbar",sessionList);
 
   const formatDate = (event) => {
     const date = new Date(event);
@@ -53,7 +52,8 @@ const ProductSidebar = ({ setSelectedProductSession }) => {
             {
               sessionList?.map((e, index) => {
                 return (
-                  <div key={index} onClick={() => setSelectedProductSession(e.sessionId)} choro className='user-list'>
+                  <div key={index} onClick={() => setSelectedProductSession(e.sessionId)} choro className={selectedProductSession == e.sessionId ? 'active' : 'user-list'}>
+                     <h4>{index + 1}.</h4>
                     <img style={{ color: "white" }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Emoji_u1f4ac.svg/128px-Emoji_u1f4ac.svg.png" alt="" srcset="" />
                     <h5 >{formatDate(e.timestamp)}</h5>
                   </div>

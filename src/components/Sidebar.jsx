@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-const Sidebar = ({ setSelectedSession }) => {
+const Sidebar = ({ setSelectedSession , selectedSession}) => {
 
 
   const [sessionList, setSessionList] = useState([]);
-
+  
 
   useEffect(() => {
     loadTranscripts();
@@ -20,7 +20,7 @@ const Sidebar = ({ setSelectedSession }) => {
     }
   };
 
-console.log(sessionList);
+
   const formatDate = (event) => {
     const date = new Date(event);
     const options = {
@@ -38,6 +38,13 @@ console.log(sessionList);
 
     return formattedDateTime;
   }
+
+  const handleOnClick =(e)=>{
+    setSelectedSession(e.sessionId)
+  }
+
+console.log(selectedSession);
+
   return (
     <div className="main">
       <div className="sidebar">
@@ -48,13 +55,17 @@ console.log(sessionList);
             Concierge
             </div>
           </li>
-          <li>
+          <li id='sidebar-list'>
             {
               sessionList?.map((e, index) => {
                 return (
-                  <div key={index} onClick={() => setSelectedSession(e.sessionId)} choro className='user-list'>
+                  
+                  <div key={index} onClick={()=>handleOnClick(e)} choro className={selectedSession == e.sessionId ? 'active' : 'user-list'}>
+                    {/* <h6>{`${e.sessionId}  ${selectedSession}`}</h6> */}
+                    <h4>{index + 1}.</h4>
                     <img style={{ color: "white" }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Emoji_u1f4ac.svg/128px-Emoji_u1f4ac.svg.png" alt="" srcset="" />
                     <h5 >{formatDate(e.timestamp)}</h5>
+      
                   </div>
                 )
               })

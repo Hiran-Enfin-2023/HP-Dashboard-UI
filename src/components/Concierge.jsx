@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css"
 import Sidebar from './Sidebar';
+import { ChatContainer, MainContainer, Message, MessageList } from '@chatscope/chat-ui-kit-react';
+import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 
 const Concierge = ({ selectedSession, setSelectedSession, menu, setMenu }) => {
   const [messages, setMessages] = useState([]);
@@ -11,7 +13,7 @@ const Concierge = ({ selectedSession, setSelectedSession, menu, setMenu }) => {
     }
   }, [selectedSession]);
 
-  // console.log(selectedSession);
+
 
   const loadTranscripts = async () => {
     try {
@@ -30,19 +32,23 @@ const Concierge = ({ selectedSession, setSelectedSession, menu, setMenu }) => {
       console.error('Error loading transcripts:', error);
     }
   };
-  console.log(messages);
+
+
+ 
+
+
 
   return (
     <section className="middle-sections" id="transcripts">
-      <Sidebar setSelectedSession={setSelectedSession} />
+      <Sidebar setSelectedSession={setSelectedSession} selectedSession={selectedSession} />
 
       <div id='message-main'>
 
-        <h3 style={{position:"sticky"}} className="dash-head">Messages</h3>
+        <h3 style={{ position: "sticky" }} className="dash-head">Messages</h3>
 
         <div className="message-container">
 
-          {messages.map((message, index) => {
+          {/* {messages.map((message, index) => {
             return (
               <div className="box">
                 <div
@@ -61,7 +67,29 @@ const Concierge = ({ selectedSession, setSelectedSession, menu, setMenu }) => {
             )
           }
           )
-          }
+          } */}
+          <MainContainer>
+            <ChatContainer>
+
+              <MessageList >
+                {messages.map((message) => {
+                  return (
+                    <>
+                      <Message style={{ padding: '8px' }}
+                        model={{
+                          message: message.content,
+                          direction: message.role === 'assistant' ? 'outgoing' : 'incoming'
+                        }}
+                      />
+                
+                    </>
+                  )
+                })}
+              </MessageList>
+
+          
+            </ChatContainer>
+          </MainContainer>
         </div>
 
       </div>
